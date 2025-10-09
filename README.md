@@ -1,2 +1,3 @@
-# empirical_software_engineering_project
-final project for empirical software engineering 
+# Observational Study on usage of LLMs in public github projects
+This project aims to produce a report summarizing all the findings of the observational study. This repository will also contain Python scripts used for data mining and data processing.
+
