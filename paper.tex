@@ -27,7 +27,7 @@
 	twoside, % Two side traditional mode where headers and footers change between odd and even pages, comment this option to make them fixed
 ]{LTJournalArticle}
 
-\addbibresource{sample.bib} % BibLaTeX bibliography file
+\addbibresource{paper.bib} % BibLaTeX bibliography file
 
 \runninghead{Usage of LLMs in Github repos} % A shortened article title to appear in the running head, leave this command empty for no running head
 
@@ -54,7 +54,7 @@
 % Full-width abstract
 \renewcommand{\maketitlehookd}{%
 	\begin{abstract}
-		\noindentThe current landscape of software engineering is increasingly shaped by the adoption of Large Language Models (LLMs), both as tools that support the development process and as integrated components of final applications. Understanding how and when developers apply these models is therefore essential. This study surveys public GitHub repositories to identify the LLM technologies they employ, if any, and to collect additional metrics that support a broader understanding of the popularity and distribution of different LLM technologies, their areas of application, and their correlation with other project characteristics.
+		\noindent The current landscape of software engineering is increasingly shaped by the adoption of Large Language Models (LLMs), both as tools that support the development process and as integrated components of final applications. Understanding how and when developers apply these models is therefore essential. This study surveys public GitHub repositories to identify the LLM technologies they employ, if any, and to collect additional metrics that support a broader understanding of the popularity and distribution of different LLM technologies, their areas of application, and their correlation with other project characteristics.
 		% TO DO - add methods, results and conclusion.
 	\end{abstract}
 }
@@ -88,6 +88,11 @@ In hac habitasse platea dictumst. Curabitur mattis elit sit amet justo luctus ve
 
 Maecenas consectetur metus at tellus finibus condimentum. Proin arcu lectus, ultrices non tincidunt et, tincidunt ut quam. Integer luctus posuere est, non maximus ante dignissim quis. Nunc a cursus erat. Curabitur suscipit nibh in tincidunt sagittis. Nam malesuada vestibulum quam id gravida. Proin ut dapibus velit. Vestibulum eget quam quis ipsum semper convallis. Duis consectetur nibh ac diam dignissim, id condimentum enim dictum. Nam aliquet ligula eu magna pellentesque, nec sagittis leo lobortis. Aenean tincidunt dignissim egestas.
 
+%------------------------------------------------
+
+\section{Related Work}
+
+The existing literature already includes numerous empirical studies covering a wide range of topics related to Large Language Models (LLMs), such as exploring new domains of application (e.g., assisting in peer review \autocite{zhou-etal-2024-llm}, code understanding \autocite{10.1145/3597503.3639187}, and LLM-as-a-judge scenarios \autocite{gu2025surveyllmasajudge}), as well as studies focused on improving their performance \autocite{NEURIPS2024-71c3451f}. However, to our knowledge, there have not been many studies on the popularity of different LLM technologies in LLM-integrated software. An important study on the topic of LLM-integrated software \autocite{weber2024largelanguagemodelssoftware} attempts to establish new terminology, concepts, and methods for LLM-integrated application engineering. LLM-integrated application engineering refers to an emerging branch of software engineering that studies LLM-integrated applications, which are software systems that leverage LLMs to provide functionalities that would otherwise be infeasible or require substantial development effort to implement. To this end, the study proposes a structured framework for categorizing and analyzing LLM-integrated applications across various domains. Another paper on the same topic \autocite{10.1145/3715007} explores LLM-integrated application engineering from the perspective of its challenges. These challenges span different areas, such as prompts, APIs, and plugins, and require developers to navigate unique methodologies and considerations specific to LLM application development. The authors crawled and analyzed approximately 30,000 relevant questions from popular OpenAI developer forums to build a taxonomy of challenges faced by LLM developers and summarized a set of findings and actionable insights. This paper tries to build on some the concepts introduced in the two studies above through an observational study of public GitHub repositories of LLM-integrated applications.
 %------------------------------------------------
 
 \section{Methodologies}
@@ -202,7 +207,7 @@ This is a clickable URL link: \href{https://www.latextemplates.com}{LaTeX Templa
 
 \section{Discussion}
 
-This statement requires citation \autocite{Smith:2023qr}. This statement requires multiple citations \autocite{Smith:2023qr, Smith:2024jd}. This statement contains an in-text citation, for directly referring to a citation like so: \textcite{Smith:2024jd}.
+This statement requires citation. This statement requires multiple citations . This statement contains an in-text citation, for directly referring to a citation like so:.
 
 \subsection{Subsection One}
 
