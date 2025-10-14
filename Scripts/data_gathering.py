@@ -20,27 +20,31 @@ params = {
 
 headers = {
     "Accept": "application/vnd.github+json",
-    "Authorization": os.getenv('GITHUB_TOKEN')
+    "Authorization": f"Bearer {os.getenv('GITHUB_TOKEN')}"
 }
 
 response = req.get(SEARCH_URL, params=params, headers=headers)
 filtered_response = response.json().get('items', [])
 for repo in filtered_response:
-    print(repo['full_name'] + " ----- " + repo['html_url'])
-
-print("------------------------------------------------------------------------------------")
-
-counter = 0
-
-for repo in filtered_response:
+    #print(repo['full_name'] + " ----- " + repo['html_url'])
     full_name = repo['full_name']
     c_query = f'"import OpenAI" repo:{full_name}'
 
     params = {
-        "q": c_query,   # sort by popularity
-        "order": "desc" # descrescent order
+        "q": c_query,  # sort by popularity
+        "order": "desc"  # descrescent order
     }
 
     c_response = req.get(CODE_URL, params=params, headers=headers)
 
-    print(c_response.json())
+    print(full_name, ":", c_response.status_code)
+
+    while(c_response.status_code == 403):
+        c_response = req.get(CODE_URL, params=params, headers=headers)
+
+    if c_response.status_code == 200:
+        print(c_response.json().get('total_count', 0))
+    else:
+        print(c_response.json())
+
+print("------------------------------------------------------------------------------------")
