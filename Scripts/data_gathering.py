@@ -1,50 +1,48 @@
 import time
 import os
+
+import requests
 import requests as req
+from datetime import date
+from dateutil.relativedelta import relativedelta
+import json
 
 # variables and constants
 SEARCH_URL = 'https://api.github.com/search/repositories'
 CODE_URL = 'https://api.github.com/search/code'
 
-sample_len = 10
+date_list = []
+date_var = date.fromisoformat('2024-01-01')
+while date_var < date.today():
+    date_list.append(date_var)
+    date_var = date_var + relativedelta(months=1)
+
+sample_len = 5
+queries = []
 
 # github api request construction
-query = 'language:python topic:ai'
+for i in range(len(date_list) - 1):
+    queries.append(f"language:python created:{date_list[i]}..{date_list[i + 1]} size:<10000")
 
-params = {
+
+params = [ {
     "q": query,
     "sort": "stars",    # sort by popularity
     "order": "desc",    # descrescent order
     "per_page": sample_len
-}
+} for query in  queries]
 
 headers = {
     "Accept": "application/vnd.github+json",
     "Authorization": f"Bearer {os.getenv('GITHUB_TOKEN')}"
 }
 
-response = req.get(SEARCH_URL, params=params, headers=headers)
-filtered_response = response.json().get('items', [])
-for repo in filtered_response:
-    #print(repo['full_name'] + " ----- " + repo['html_url'])
-    full_name = repo['full_name']
-    c_query = f'"import OpenAI" repo:{full_name}'
+filtered_response = []
+for param in params:
+    response = requests.get(SEARCH_URL, params=param, headers=headers)
+    filtered_response.append(response.json().get('items', []))
 
-    params = {
-        "q": c_query,  # sort by popularity
-        "order": "desc"  # descrescent order
-    }
-
-    c_response = req.get(CODE_URL, params=params, headers=headers)
-
-    print(full_name, ":", c_response.status_code)
-
-    while(c_response.status_code == 403):
-        c_response = req.get(CODE_URL, params=params, headers=headers)
-
-    if c_response.status_code == 200:
-        print(c_response.json().get('total_count', 0))
-    else:
-        print(c_response.json())
+with open("raw_data.json","w") as f:
+    json.dump(filtered_response, f)
 
 print("------------------------------------------------------------------------------------")

@@ -7,4 +7,6 @@
 /*.run.xml
 /*.synctex.gz
 /*.pdf
+.idea
 .venv
+*.json
