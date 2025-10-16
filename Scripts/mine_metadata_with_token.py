@@ -32,7 +32,7 @@ def mine_repos(client: Github, language: str, n_repo_month: int, starting_date: 
 
 if __name__ == "__main__":
 
-    # logout if no token is provided
+    # exit if no token is provided
     if len(sys.argv) < 2:
         print("No token provided")
         sys.exit()
