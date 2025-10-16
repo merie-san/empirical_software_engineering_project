@@ -79,7 +79,9 @@ def repo_search(
 
             # deal with rate limit
             if response.status_code == 403:
-                reset_time = int(response.headers.get("X-RateLimit-Reset", time.time() + 60))
+                reset_time = int(
+                    response.headers.get("X-RateLimit-Reset", time.time() + 60)
+                )
                 sleep_time = max(reset_time - time.time(), 1)
                 print(f"Rate limited. Sleeping {int(sleep_time)} seconds...")
                 time.sleep(sleep_time)
@@ -131,7 +133,9 @@ def repo_search(
                         "has_downloads": item.get("has_downloads"),
                     }
                 )
-                print(f"appended repo {item.get("full_name")} created at {item.get("created_at")}")
+                print(
+                    f"appended repo {item.get("full_name")} created at {item.get("created_at")}"
+                )
 
                 # break if number of repos per month has been reached
                 n += 1
@@ -156,15 +160,17 @@ if __name__ == "__main__":
         description="Collect repository metadata monthly from a starting day up to an end date",
     )
     parser.add_argument("language")
-    parser.add_argument("starting_date")
-    parser.add_argument("-f","--finish", default=date.today().isoformat())
-    parser.add_argument("-m","--monthly", default=100, type=int)
+    parser.add_argument("starting_date", type=lambda s: date.fromisoformat(s))
+    parser.add_argument(
+        "-f", "--finish", default=date.today(), type=lambda s: date.fromisoformat(s)
+    )
+    parser.add_argument("-m", "--monthly", default=100, type=int)
     parser.add_argument("-t", "--token")
     args = parser.parse_args()
     repo_search(
         args.language,
-        date.fromisoformat(args.starting_date),
-        date.fromisoformat(args.finish),
+        args.starting_date,
+        args.finish,
         args.monthly,
-        token = args.token or ""
+        token=args.token or "",
     )
