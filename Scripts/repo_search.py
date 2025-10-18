@@ -39,6 +39,7 @@ def repo_search(
     while date_var < ending_date:
         date_list.append(date_var)
         date_var = date_var + relativedelta(months=1)
+    date_list.append(ending_date)
 
     # headers do not change
     headers = {
@@ -104,8 +105,6 @@ def repo_search(
                         "description": item.get("description"),
                         "language": item.get("language"),
                         "created_at": item.get("created_at"),
-                        "updated_at": item.get("updated_at"),
-                        "pushed_at": item.get("pushed_at"),
                         "stargazers_count": item.get("stargazers_count"),
                         "watchers_count": item.get("watchers_count"),
                         "forks_count": item.get("forks_count"),
@@ -122,15 +121,7 @@ def repo_search(
                         "owner_type": (
                             item["owner"]["type"] if item.get("owner") else None
                         ),
-                        "visibility": item.get("visibility"),
                         "archived": item.get("archived"),
-                        "disabled": item.get("disabled"),
-                        "score": item.get("score"),
-                        "has_issues": item.get("has_issues"),
-                        "has_projects": item.get("has_projects"),
-                        "has_wiki": item.get("has_wiki"),
-                        "has_pages": item.get("has_pages"),
-                        "has_downloads": item.get("has_downloads"),
                     }
                 )
                 print(
