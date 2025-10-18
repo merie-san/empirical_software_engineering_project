@@ -51,7 +51,7 @@ def repo_search(
     queries = []
     for i in range(len(date_list) - 1):
         queries.append(
-            f"language:{language.lower()} created:{date_list[i]}..{date_list[i + 1]} size:<10000"
+            f"language:{language.lower()} created:{date_list[i]}..{date_list[i + 1]}"
         )
 
     # build the parameter dicts
