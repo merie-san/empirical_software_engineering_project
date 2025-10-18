@@ -139,8 +139,8 @@ def repo_search(
                 break
 
     # write to json file
-    with open("repo_metadata.json", "w") as f:
-        json.dump(responses, f)
+    with open(f"{language.lower()}_repo_metadata.json", "w") as f:
+        json.dump(responses, f, ensure_ascii=False)
 
     return
 
