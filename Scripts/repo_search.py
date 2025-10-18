@@ -30,7 +30,7 @@ def repo_search(
             raise ValueError("No github token provided")
 
     # github does not display more than 1000 results
-    if repos_per_month > 100:
+    if repos_per_month > 1000:
         raise ValueError("repos per month cannot be higher than 100")
 
     # generate the necessary date objects
